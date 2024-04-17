@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2
+    </title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    }
+
+    .container {
+    text-align: center;
+    margin-top: 50px;
+    }
+
+    input[type="number"], button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    }
+
+    input[type="number"] {
+    width: 80px;
+    }
+
+    button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
+
+    button:hover {
+    background-color: #45a049;
+    }
+
+    @media (max-width: 600px) {
+    input[type="number"] {
+        width: 60px;
+    }
+    }
+
+    @media (max-width: 400px) {
+    input[type="number"] {
+        width: 40px;
+    }
+    }
+</style>
+<body>
+    <div class="container">
+        <input type="number" id="minutesInput" placeholder="Minutes">
+        <input type="number" id="secondsInput" placeholder="Seconds">
+        <button onclick="startCountdown()">START</button>
+        <button onclick="resetCountdown()">RESET</button>
+    </div>
+    
+    <audio id="alarmSound">
+        <source src="Nhac-chuong-bao-thuc-Samsung-mac-dinh-www_nhacchuongvui_com.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>  
+</body>
+<script>
+    function startCountdown() {
+    var minutes = parseInt(document.getElementById('minutesInput').value);
+    var seconds = parseInt(document.getElementById('secondsInput').value);
+
+    if (isNaN(minutes) || isNaN(seconds)) {
+        alert('Please enter valid numbers.');
+        return;
+    }
+
+    var totalSeconds = minutes * 60 + seconds;
+
+    var countdownInterval = setInterval(function() {
+        totalSeconds--;
+        var minutesDisplay = Math.floor(totalSeconds / 60);
+        var secondsDisplay = totalSeconds % 60;
+
+        document.getElementById('minutesInput').value = minutesDisplay;
+        document.getElementById('secondsInput').value = secondsDisplay;
+
+        if (totalSeconds <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('alarmSound').play();
+        alert('Time\'s up!');
+        }
+    }, 1000);
+    }
+
+    function resetCountdown() {
+    clearInterval(countdownInterval);
+    document.getElementById('minutesInput').value = '';
+    document.getElementById('secondsInput').value = '';
+    document.getElementById('alarmSound').pause(); 
+    document.getElementById('alarmSound').currentTime = 0;
+    }
+</script>
+</html>
