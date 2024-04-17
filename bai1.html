@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1</title>
+</head>
+<style>
+    html {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+body {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-image: url('https://img.freepik.com/premium-photo/trees-forest-park-seamless-pattern-woodland-watercolor-repeat-print-cartoon-trees-background-kids-wallpaper-textile-wrapping-paper-decoration_408078-563.jpg?w=2000');
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    position: absolute;
+    top: 40%;
+    border-radius: 16px;
+    text-align: center;
+    background-color: rgba(102, 255, 178, 0.8);
+  }
+
+  input[type="number"], button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  input[type="number"] {
+    width: 150px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+</style>
+<body>
+    <div class="container">
+      <input type="number" id="inputA" placeholder="Enter number A">
+      <input type="number" id="inputB" placeholder="Enter number B"><br><br>
+      <button onclick="calculate('SUM')">SUM</button>
+      <button onclick="calculate('SUBTRACT')">SUBTRACT</button>
+      <button onclick="calculate('MULTIPLY')">MULTIPLY</button>
+      <button onclick="calculate('DIVIDE')">DIVIDE</button>
+      <button onclick="reset()">RESET</button><br><br>
+      <div id="result"></div>
+    </div>
+</body>
+<script>
+     function calculate(operation) {
+    var inputA = document.getElementById('inputA').value;
+    var inputB = document.getElementById('inputB').value;
+
+    if (isNaN(inputA) || isNaN(inputB)) {
+      document.getElementById('result').innerText = 'Nhập số';
+      return;
+    }
+
+    inputA = parseFloat(inputA);
+    inputB = parseFloat(inputB);
+
+    var result;
+    switch (operation) {
+      case 'SUM':
+        result = inputA + inputB;
+        break;
+      case 'SUBTRACT':
+        result = inputA - inputB;
+        break;
+      case 'MULTIPLY':
+        result = inputA * inputB;
+        break;
+      case 'DIVIDE':
+        if (inputB === 0) {
+          result = 'Không thể chia cho 0.';
+        } else {
+          result = inputA / inputB;
+        }
+        break;
+      default:
+        result = 'Không hợp lệ.';
+    }
+
+    document.getElementById('result').innerText = 'Kết quả: ' + result;
+  }
+
+  function reset() {
+    document.getElementById('inputA').value = '';
+    document.getElementById('inputB').value = '';
+    document.getElementById('result').innerText = '';
+  }
+  </script>
+</html>
